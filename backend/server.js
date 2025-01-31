@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 
 // Validar variables de entorno
 if (!process.env.MONGODB_URI) {
@@ -32,10 +32,15 @@ mongoose
     process.exit(1); // Cierra el servidor si no puede conectarse a MongoDB
   });
 
-// Rutas
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.send("¡Bienvenido a la API de suscripciones!");
+});
+
+// Otras rutas
 app.use("/api/subscriptions", require("./routes/subscriptionRoutes")); // Rutas de suscripciones
 
-// Manejo de rutas no encontradas
+// Manejo de rutas no encontradas (debe ir al final)
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });
 });
