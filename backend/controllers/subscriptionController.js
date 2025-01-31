@@ -11,6 +11,16 @@ const createSubscription = async (req, res) => {
   }
 };
 
+const getSubscriptions = async (req, res) => {
+  try {
+    const subscriptions = await Subscription.find();
+    res.status(200).json(subscriptions);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener las suscripciones" });
+  }
+};
+
 module.exports = {
   createSubscription,
+  getSubscriptions,
 };
