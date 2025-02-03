@@ -26,10 +26,10 @@ app.use(express.json());
 // Conexión a MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => console.log("Conectado a MongoDB"))
+  .then(() => console.log("✅ Conectado a MongoDB"))
   .catch((error) => {
-    console.error("Error de conexión:", error);
-    process.exit(1); // Cierra el servidor si no puede conectarse a MongoDB
+    console.error("❌ Error de conexión:", error);
+    process.exit(1);
   });
 
 // Ruta raíz
@@ -37,10 +37,11 @@ app.get("/", (req, res) => {
   res.send("¡Bienvenido a la API de suscripciones!");
 });
 
-// Otras rutas
-app.use("/api/subscriptions", require("./routes/subscriptionRoutes")); // Rutas de suscripciones
+// Importar y usar rutas
+const subscriptionRoutes = require("./routes/subscriptionRoutes");
+app.use("/api", subscriptionRoutes); // Cambié el prefijo a `/api`
 
-// Manejo de rutas no encontradas (debe ir al final)
+// Manejo de rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });
 });
@@ -53,5 +54,5 @@ process.on("unhandledRejection", (error) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Servidor backend en https://app-subs.onrender.com`);
+  console.log(`🚀 Servidor backend en https://app-subs.onrender.com`);
 });
