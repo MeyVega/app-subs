@@ -27,6 +27,11 @@ app.use(express.json());
 // 🔌 Conectar a MongoDB
 connectDB();
 
+// Ruta para el estado de la API
+app.get("/api/status", (req, res) => {
+    res.json({ message: "API funcionando correctamente" });
+});
+
 // 🛤️ Importar y usar rutas
 const subscriptionRoutes = require("./routes/subscriptionRoutes");
 app.use("/api/subscriptions", subscriptionRoutes);
