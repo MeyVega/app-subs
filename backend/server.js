@@ -4,7 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db"); // Importar conexión a MongoDB
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 // ✅ Verificar si la URI de la base de datos está cargada
 if (!process.env.MONGODB_URI) {
